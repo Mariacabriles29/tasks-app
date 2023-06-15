@@ -1,5 +1,9 @@
 
-
+// const formData = {
+//   email: '',
+//   password: '',
+//   displayName: '',
+// };
 export const RegisterPage = () => {
   return (
     <>
