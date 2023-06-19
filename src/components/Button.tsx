@@ -1,27 +1,46 @@
 import { ReactNode } from "react";
 import styles from "../styles/modules/button.module.scss";
 
-// import { getClasses } from "../utils/getClasses";-> aqui manejo los filter
+import { getClasses } from "../utils/getClasses";
 
 interface ButtonProps {
   children: ReactNode;
-  type: "button";
-  variant: "primary";
+  type?: "submit" | "button";
+  variant?: "primary" | "secondary";
 }
-const buttonTypes = {
-  primary: "primary",
-  secondary: "secondary",
-};
+// const buttonTypes = {
+//   primary: "primary",
+//   secondary: "secondary",
+// };
 
-export const Button = ({
+function Button({
   children,
   variant = "primary",
+  type,
 
   ...rest
-}: ButtonProps) => {
+}: ButtonProps) {
   return (
-    <button className={styles.button} type="button">
+    <button
+      type={type === "submit" ? "submit" : "button"}
+      className={styles.button}
+    >
       {children}
     </button>
   );
-};
+}
+
+interface SelectButtonProps {
+  children: ReactNode;
+  id: "status";
+}
+
+function SelectButton({ children, id, ...rest }: SelectButtonProps) {
+  return (
+    <select id={id} className={styles.button} {...rest}>
+      {children}
+    </select>
+  );
+}
+export { SelectButton };
+export default Button;

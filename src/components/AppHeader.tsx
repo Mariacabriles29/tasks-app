@@ -1,12 +1,18 @@
 import React from "react";
-import { Button } from "./Button";
+import Button, { SelectButton } from "./Button";
+import styles from "../styles/modules/app.module.scss";
 
 export const AppHeader = () => {
   return (
-    <div>
-      <Button type={"button"} variant={"primary"}>
+    <div className={styles.appHeader}>
+      <Button type="button" variant="primary">
         Add Task
       </Button>
+      <SelectButton id="status">
+        <option value="all">All</option>
+        <option value="incomplete">Incomplete</option>
+        <option value="complete">Complete</option>
+      </SelectButton>
     </div>
   );
 };
