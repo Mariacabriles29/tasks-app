@@ -1,9 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { authSlice } from './auth/authSlice';
+// store.ts
 
-export const store = configureStore({
-  reducer: {
-    /*aqui se hace referencia a los slices reducer */
-    auth: authSlice.reducer,
-  },
-})
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import userReducer from "./reducers/userReducer";
+import taskReducer from "./reducers/taskReducer";
+
+const rootReducer = combineReducers({
+  users: userReducer,
+  tasks: taskReducer,
+});
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunkMiddleware))
+);
+
+export default store;

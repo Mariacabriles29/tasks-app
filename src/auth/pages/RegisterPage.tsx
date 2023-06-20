@@ -1,10 +1,13 @@
 import { Grid, TextField, Button, Typography, Link } from "@mui/material";
 import { AuthLayout } from "../layout/AuthLayout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
-import { useForm } from "../../hooks";
+
 import { creatingUserWithEmailPassword } from "../../store/auth/thunks";
+import { fetchUsers } from "../../store/actions/userActions";
+import { UserActionTypes } from "../../helpers/UserTypes";
+import { useNavigate } from "react-router-dom";
 
 const formData = {
   email: "",
@@ -15,12 +18,36 @@ const formData = {
 export const RegisterPage = () => {
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const { formState, email, password, name, isFormValid } = useForm(formData);
+  const [userName, setUserName] = useState<string>("");
+  const [userPassword, setUserPassword] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const users = useSelector((state: any) => state.users.users);
+  const navigate = useNavigate();
 
   const onSubmit = (event: any) => {
     event.preventDefault();
     setFormSubmitted(true);
-    // dispatch(creatingUserWithEmailPassword(email, password, name));
+
+    if (
+      userName.length != 0 &&
+      userPassword.length != 0 &&
+      userEmail.length != 0
+    ) {
+      const currentUser = {
+        id: 1,
+        name: userName,
+        email: userEmail,
+        password: userPassword,
+      };
+      let newUsers = [];
+      newUsers = [users.flat(), currentUser].flat();
+
+      dispatch({
+        payload: newUsers.flat(),
+        type: UserActionTypes.FETCH_USERS_SUCCESS,
+      });
+      navigate("/login");
+    }
   };
 
   return (
@@ -35,7 +62,8 @@ export const RegisterPage = () => {
                 placeholder="Nombre completo"
                 fullWidth
                 name="name"
-                value={name}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sx={{ mt: 2 }}>
@@ -45,17 +73,20 @@ export const RegisterPage = () => {
                 placeholder="correo@google.com"
                 fullWidth
                 name="email"
-                value={email}
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField
+                sx={{ fontSize: 16 }}
                 label="Contraseña"
                 type="password"
                 placeholder="Contraseña"
                 fullWidth
                 name="password"
-                value={password}
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
               />
             </Grid>
             <Grid container spacing={2} sx={{ mb: 2, mt: 2 }}>

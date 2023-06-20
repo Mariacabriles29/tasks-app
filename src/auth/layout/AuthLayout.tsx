@@ -27,12 +27,11 @@ export const AuthLayout = ({ children, title = "" }: AuthLayoutProps) => {
           borderRadius: 2,
         }}
       >
-        <Typography variant="h5" sx={{ mb: 1, textAlign: "center" }}>
+        <Typography variant="h4" sx={{ mb: 1, textAlign: "center" }}>
           {title}
         </Typography>
         {children}
       </Grid>
-      
     </Grid>
   );
 };
