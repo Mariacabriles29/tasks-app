@@ -1,5 +1,6 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import React, { ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
 
 type AuthLayoutProps = {
   children: ReactNode;
@@ -8,35 +9,36 @@ type AuthLayoutProps = {
 
 export const AuthLayout = ({ children, title = "" }: AuthLayoutProps) => {
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{
-        minHeight: "100vh",
-        backgroundColor: "primary.main",
-        padding: 4,
-        fontSize: "1.2rem",
-      }}
-    >
-      <Grid
-        item
-        className="box-shadow"
-        xs={3}
+    <Container component="main">
+      <CssBaseline />
+      <Box
         sx={{
-          width: { sm: 450 },
-          backgroundColor: "white",
-          padding: 3,
-          borderRadius: 2,
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+          maxWidth: "1200px",
         }}
       >
-        <Typography variant="h4" sx={{ mb: 1, textAlign: "center" }}>
+        <Typography variant="h3" sx={{ mb: 1, textAlign: "center" }}>
           {title}
         </Typography>
         {children}
-      </Grid>
-    </Grid>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </Box>
+    </Container>
   );
 };

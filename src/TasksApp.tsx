@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Layout } from "./components/Layout";
 import PageTitle from "./components/PageTitle";
@@ -9,14 +9,27 @@ import { UserActionTypes } from "./helpers/UserTypes";
 import { useDispatch } from "react-redux";
 import { TaskActionTypes } from "./helpers/taskTypes";
 import { TodoList } from "./components/TodoList";
+import CircularStatic, { Loader } from "./components/Loader";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const TasksApp = () => {
   const dispatch = useDispatch();
+  const [progress, setProgress] = useState(true);
 
   useEffect(() => {
     loadUsers();
     loadTasks();
+    intData();
   }, []);
+
+  const intData = () => {
+    const timer = setInterval(() => {
+      setProgress(false);
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  };
 
   const loadUsers = () => {
     let currentsUsers: any = localStorage.getItem("users");
@@ -46,9 +59,5 @@ export const TasksApp = () => {
     });
   };
 
-  return (
-    <Layout>
-      <AppRouter />
-    </Layout>
-  );
+  return <Layout>{progress ? <CircularProgress /> : <AppRouter />}</Layout>;
 };

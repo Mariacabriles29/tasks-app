@@ -7,6 +7,7 @@ import { useState } from "react";
 import { fetchUsers } from "../../store/actions/userActions";
 import { UserActionTypes } from "../../helpers/UserTypes";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const formData = {
   email: "",
@@ -33,7 +34,7 @@ export const RegisterPage = () => {
       userEmail.length != 0
     ) {
       const currentUser = {
-        id: 1,
+        id: uuidv4(),
         name: userName,
         email: userEmail,
         password: userPassword,
