@@ -7,11 +7,12 @@ import { useSelector } from "react-redux";
 export const LoginPage = () => {
   const [userPassword, setUserPassword] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
-  const users = useSelector((state: any) => state.users);
+  const users = useSelector((state: any) => state.users.users);
   const navigate = useNavigate();
 
   const onSubmit = (event: any) => {
     event.preventDefault();
+
     const existUser = users.find(
       (u: any) => u.email === userEmail && u.password === userPassword
     );
@@ -49,7 +50,12 @@ export const LoginPage = () => {
           </Grid>
           <Grid container xs={12} sx={{ mb: 2, mt: 2 }}>
             <Grid item xs={12} sm={12}>
-              <Button type="submit" variant="contained" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ fontSize: "1.2rem" }}
+              >
                 Login
               </Button>
             </Grid>

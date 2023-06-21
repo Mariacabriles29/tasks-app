@@ -4,7 +4,6 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 
-import { creatingUserWithEmailPassword } from "../../store/auth/thunks";
 import { fetchUsers } from "../../store/actions/userActions";
 import { UserActionTypes } from "../../helpers/UserTypes";
 import { useNavigate } from "react-router-dom";
@@ -91,13 +90,20 @@ export const RegisterPage = () => {
             </Grid>
             <Grid container spacing={2} sx={{ mb: 2, mt: 2 }}>
               <Grid item xs={12} sm={12}>
-                <Button type="submit" variant="contained" fullWidth>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  sx={{ fontSize: "1.2rem" }}
+                >
                   Crear cuenta
                 </Button>
               </Grid>
             </Grid>
             <Grid container direction="row" justifyContent="end">
-              <Typography sx={{ mr: 1 }}>Ya tienes cuenta?</Typography>
+              <Typography sx={{ mr: 1, fontSize: "1.5rem" }}>
+                Ya tienes cuenta?
+              </Typography>
               <Link
                 component={RouterLink}
                 sx={{
@@ -110,6 +116,7 @@ export const RegisterPage = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   color: "white",
+                  fontSize: "1.5rem",
                 }}
                 color="inherit"
                 to="/auth/register"

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-import { AppHeader } from "./components/AppHeader";
 import { Layout } from "./components/Layout";
 import PageTitle from "./components/PageTitle";
 
