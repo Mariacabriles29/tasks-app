@@ -1,4 +1,5 @@
 Todo App
+
 Esta es una aplicación de lista de tareas (Todo App) construida con React que permite a los usuarios gestionar una lista de tareas. Utiliza Redux para el manejo del estado y se integra con PayPal para realizar compras.
 
 Características
