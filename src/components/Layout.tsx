@@ -1,5 +1,3 @@
-import { Grid } from "@mui/material";
-
 interface Props {
   children: JSX.Element | JSX.Element[];
 }

@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+Todo App
+Esta es una aplicación de lista de tareas (Todo App) construida con React que permite a los usuarios gestionar una lista de tareas. Utiliza Redux para el manejo del estado y se integra con PayPal para realizar compras.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Características
 
-## Available Scripts
+Crear tareas: Los usuarios pueden agregar nuevas tareas ingresando un título y una descripción en el formulario de creación de tareas.
+Ver lista de tareas: La aplicación muestra una lista de tareas que incluye el título y la descripción de cada tarea.
 
-In the project directory, you can run:
+Comprar tareas: Cada tarea en la lista incluye un botón "Comprar". Al hacer clic en este botón, se activa la integración con PayPal para realizar la compra de la tarea.
 
-### `npm start`
+Integración con PayPal: Se utiliza la API de PayPal y el componente PayPalButton de la librería react-paypal-button-v2 para procesar los pagos. Al hacer clic en el botón "Comprar", se abre una ventana emergente de PayPal para completar el proceso de pago.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Almacenamiento en localStorage: Se utiliza el hook useEffect() para almacenar el array de tareas en el localStorage del navegador. Esto permite que los datos de las tareas persistan incluso después de cerrar la aplicación.
+Recuperación de datos del localStorage: Al iniciar la aplicación o al actualizar la lista de tareas, se recupera el array de tareas almacenado en el localStorage para mostrar las tareas existentes.
+Indicador de carga: Mientras se recuperan los datos del localStorage, se muestra un mensaje de "Cargando" para indicar al usuario que la aplicación está obteniendo los datos.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Requisitos
+Node.js
+npm o yarn
 
-### `npm test`
+Instalación
+Clona este repositorio en tu máquina local.
+Navega al directorio raíz del proyecto.
+Instala las dependencias utilizando el comando npm install o yarn install.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Uso
+Crear una nueva tarea:
 
-### `npm run build`
+Ingresa un título y una descripción en el formulario de creación de tareas.
+Haz clic en el botón "Nueva Tarea" para agregar la nueva tarea a la lista.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Ver la lista de tareas:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Observa la lista de tareas en la pantalla principal de la aplicación.
+Cada tarea muestra su título y descripción.
+Comprar una tarea:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+En la lista de tareas, encuentra la tarea que deseas comprar.
+Haz clic en el botón "Comprar" asociado a la tarea.
+Se abrirá una ventana emergente de PayPal para procesar el pago de la tarea.
+Almacenamiento y recuperación de datos:
 
-### `npm run eject`
+Los datos de las tareas se almacenan automáticamente en el localStorage del navegador.
+Al abrir la aplicación, se recuperan los datos del localStorage y se muestran en la lista de tareas.
+Contribución
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Contribución
+Si deseas contribuir a este proyecto, puedes enviar un pull request. Agradecemos cualquier mejora o corrección de errores que puedas proporcionar.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Licencia
+Este proyecto fue desarrollado para una prueba tecnica de react y fue desarrollado por (mariacabriles29)

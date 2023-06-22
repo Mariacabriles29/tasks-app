@@ -19,10 +19,13 @@ export const AuthLayout = ({ children, title = "" }: AuthLayoutProps) => {
           alignItems: "center",
           width: "100%",
           height: "100%",
-          maxWidth: "1200px",
+          maxWidth: "1000px",
         }}
       >
-        <Typography variant="h3" sx={{ mb: 1, textAlign: "center" }}>
+        <Typography
+          variant="h3"
+          sx={{ mb: 1, textAlign: "center", color: "white" }}
+        >
           {title}
         </Typography>
         {children}

@@ -6,15 +6,11 @@ import {
   Box,
   Checkbox,
   Icon,
-  Grid,
 } from "@mui/material";
 import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import { AddShoppingCart } from "@mui/icons-material";
-import AddTodoSelect from "./AddTodoSelect";
 import { ModalPaypal } from "./modals/ModalPaypal";
-import { PayPalButton } from "react-paypal-button-v2";
 
 const style = {
   bgcolor: "background.paper",
@@ -38,7 +34,6 @@ export const AddNoteCard = ({
   id,
   title,
   description,
-  onBuy,
   onDelete,
 }: AddNoteCardProps) => {
   const [checked, setChecked] = useState(false);
@@ -46,10 +41,6 @@ export const AddNoteCard = ({
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   const handleOpen = () => {

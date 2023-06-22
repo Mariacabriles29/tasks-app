@@ -1,7 +1,4 @@
-// userActions.ts
-
 import { ThunkDispatch } from "redux-thunk";
-import { Dispatch } from "redux";
 import { User, UserAction, UserActionTypes } from "../../helpers/UserTypes";
 
 export const fetchUsers = () => {

@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-
 import { Layout } from "./components/Layout";
-import PageTitle from "./components/PageTitle";
-
 import { AppRouter } from "./router/AppRouter";
-import styles from "./styles/modules/app.module.scss";
 import { UserActionTypes } from "./helpers/UserTypes";
 import { useDispatch } from "react-redux";
 import { TaskActionTypes } from "./helpers/taskTypes";
-import { TodoList } from "./components/TodoList";
-import CircularStatic, { Loader } from "./components/Loader";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export const TasksApp = () => {
@@ -33,6 +27,19 @@ export const TasksApp = () => {
 
   const loadUsers = () => {
     let currentsUsers: any = localStorage.getItem("users");
+    if (window.location.pathname.includes("/login")) {
+      localStorage.removeItem("currentUser");
+    } else {
+      let existUser = localStorage.getItem("currentUser");
+      if (existUser) {
+        existUser = JSON.parse(existUser);
+        dispatch({
+          payload: existUser,
+          type: UserActionTypes.CHECK_LOGIN,
+        });
+      }
+    }
+
     currentsUsers = JSON.parse(`${currentsUsers}`) ?? [];
 
     if (currentsUsers === null) {

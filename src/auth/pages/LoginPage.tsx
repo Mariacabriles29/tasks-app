@@ -4,21 +4,20 @@ import {
   Button,
   Avatar,
   Box,
-  Checkbox,
-  FormControlLabel,
   Typography,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthLayout } from "../layout/AuthLayout";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Img from "../../resources/img/home.jpg";
 import "./scss/LoginPage.scss";
+import { UserActionTypes } from "../../helpers/UserTypes";
+
 export const LoginPage = () => {
   const users = useSelector((state: any) => state.users.users);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -39,11 +38,14 @@ export const LoginPage = () => {
         `${u.email}`.toLowerCase() === username.toLowerCase() &&
         `${u.password}`.toLowerCase() === password.toLowerCase()
     );
-
     if (existUser) {
       localStorage.setItem("currentUser", JSON.stringify(existUser));
+      dispatch({
+        payload: existUser,
+        type: UserActionTypes.CHECK_LOGIN,
+      });
       navigate("/tasks");
-      toast.success("Incio exitoso", {
+      toast.success("Inicio exitoso", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -67,12 +69,7 @@ export const LoginPage = () => {
     }
   };
   return (
-    <Grid
-      container
-      spacing={2}
-      sx={{ width: "100%", height: "100vh" }}
-      className="william"
-    >
+    <Grid container spacing={2} sx={{ width: "100%", height: "100vh" }}>
       <Grid item xs={6} md={6} sx={{ height: "100%" }}>
         <Box
           sx={{
@@ -114,7 +111,7 @@ export const LoginPage = () => {
               id="email"
               name="username"
               autoComplete="email"
-              label="usuario"
+              label="email"
               value={username}
               onChange={handleUserName}
               autoFocus
@@ -179,6 +176,18 @@ export const LoginPage = () => {
           height={"100%"}
         />
       </Grid>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Grid>
   );
 };

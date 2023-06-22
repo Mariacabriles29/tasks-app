@@ -13,17 +13,18 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { TaskActionTypes } from "../helpers/taskTypes";
-import AddTodoSelect from "./AddTodoSelect";
-import { SelectChangeEvent } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 
+import { useNavigate } from "react-router-dom";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
+
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
@@ -34,6 +35,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
+  boxShadow: "#919eab33 0 0 6px, #919eab1f 0 12px 24px -4px",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -54,36 +56,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
   },
 }));
-interface AddTodoProps {
+interface TodoFormProps {
   open: boolean;
   handleClose: any;
   handleOpen: any;
   noteId: any;
+  handleSearchTerm: (search: string) => void;
 }
-export const AddTodo = (props: AddTodoProps) => {
-  const [open, setOpen] = useState(false);
+export const TodoForm = (props: TodoFormProps) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState("");
-  const [authorId, setAuthorId] = useState("");
-  const [selectValue, setSelectValue] = useState<string>("");
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const tasks = useSelector((state: any) => state.tasks.tasks);
 
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
-
-  const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setDescription(event.target.value);
-  };
   const handleCreateNote = () => {
     let currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
@@ -113,20 +105,17 @@ export const AddTodo = (props: AddTodoProps) => {
     }
   };
 
-  const handleSelectChange = (event: SelectChangeEvent<string>) => {
-    setSelectValue(event.target.value);
-  };
-
   return (
     <Box
       sx={{
         boxShadow: "#919eab33 0 0 6px, #919eab1f 0 12px 24px -4px;",
         display: "flex",
         justifyContent: "space-between",
-        backgroundColor: "white",
+        backgroundColor: "#1976d2cc",
         width: "100%",
         marginBottom: 8,
         padding: 4,
+        borderRadius: "15px",
       }}
       className="todo"
     >
@@ -137,9 +126,11 @@ export const AddTodo = (props: AddTodoProps) => {
       >
         Nueva Tarea
       </Button>
+
       <Search
         onChange={(e: any) => {
           setSearchTerm(e.target.value);
+          props.handleSearchTerm(e.target.value);
         }}
       >
         <SearchIconWrapper>
@@ -150,8 +141,6 @@ export const AddTodo = (props: AddTodoProps) => {
           inputProps={{ "aria-label": "search" }}
         />
       </Search>
-
-      <AddTodoSelect value={selectValue} onChange={handleSelectChange} />
 
       <Modal
         open={props.open}

@@ -1,5 +1,3 @@
-// userReducer.ts
-
 import {
   UserState,
   UserAction,
@@ -10,6 +8,7 @@ export const initialState: UserState = {
   users: [],
   loading: false,
   error: null,
+  currentUser: null,
 };
 
 const userReducer = (state = initialState, action: UserAction): UserState => {
@@ -37,6 +36,12 @@ const userReducer = (state = initialState, action: UserAction): UserState => {
         loading: false,
         error: action.payload,
       };
+    case UserActionTypes.CHECK_LOGIN:
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
+
     default:
       return state;
   }

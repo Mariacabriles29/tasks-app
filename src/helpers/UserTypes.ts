@@ -1,5 +1,3 @@
-// userTypes.ts
-
 export interface User {
   id: number;
   email: string;
@@ -11,12 +9,14 @@ export interface UserState {
   users: User[];
   loading: boolean;
   error: string | null;
+  currentUser: string | null;
 }
 
 export enum UserActionTypes {
   FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST",
   FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS",
   FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE",
+  CHECK_LOGIN = "CHECK_LOGIN",
 }
 
 interface FetchUsersRequestAction {
@@ -32,8 +32,13 @@ interface FetchUsersFailureAction {
   type: UserActionTypes.FETCH_USERS_FAILURE;
   payload: string;
 }
+interface CHECK_LOGIN {
+  type: UserActionTypes.CHECK_LOGIN;
+  payload: any;
+}
 
 export type UserAction =
   | FetchUsersRequestAction
   | FetchUsersSuccessAction
-  | FetchUsersFailureAction;
+  | FetchUsersFailureAction
+  | CHECK_LOGIN;
